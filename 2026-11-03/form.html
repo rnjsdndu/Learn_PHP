@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>폼전송</title>
+  <style>
+    textarea[name="content"] {
+      width: 400px;
+      height: 300px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- action은 보낼 곳 -->
+  <!-- method는 post방식인지 get방식인지 정해주는 것 -->
+  <form method="post" action="form_action.php" name="form1">
+    글제목:
+    <input type="text" name="subject" autocomplate="off">
+    암호:
+    <input type="password" name="password">
+    글내용:
+    <textarea name="content"></textarea>
+    <button type="button" id="submit_btn">전송</button>
+  </form>
+
+  <script>
+    const btn = document.querySelector('#submit_btn')
+    const form = form1
+    btn.addEventListener('click', ()=>{
+      if(form.subject.value == '') {
+        alert('제목을 입력해주세요')
+        return;
+      }
+      if(form.password.value == '') {
+        alert('비밀번호를 입력해주세요')
+        return;
+      }
+      if(form.content.value == '') {
+        alert('내용을 입력해주세요')
+        return;
+      }
+      document.form.submit();
+    })
+  </script>
+</body>
+</html>
