@@ -1,0 +1,13 @@
+// 데이터베이스 생성 Query
+create database kingchobo;
+
+
+// unsigned: 음수는 사용하지 않겠다
+// datetime은 연,월,일,시,일,초까지 저장 date는 연원일까지 저장
+create table board(
+idx integer unsigned not null auto_increment,
+subject varchar(255) default '' comment ''게시물 제목'
+content text comment '게시물내용',
+rdate datetime,
+primary key(idx)
+)
