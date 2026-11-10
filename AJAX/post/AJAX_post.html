@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ajax post 전송</title>
+  <style>
+    #dis {
+      margin-top: 30px;
+      width: 300px;
+    }
+
+    #dis img {
+      max-width: 100%;
+    }
+  </style>
+</head>
+<body>
+  <form action="" method="post" enctype="multipart/form-data" id="form1">
+    <!-- 기본 -->
+    <!-- <input type="file" name="photo">  -->
+
+    <!-- multiple은 멀티 업로드 -->
+    <input type="file" name="photo[]" multiple> 
+    <input type="button" value="확인" id="upload_btn">
+  </form>
+
+  <div id="dis"></div>
+
+  <script>
+    const upload_btn = document.querySelector('#upload_btn')
+    upload_btn.addEventListener('click', () => {
+      const f = document.querySelector('#form1')
+      const f1 = new FormData(f);
+      const xhr = new XMLHttpRequest();
+      xhr.open("POST", "./ajax_post.php", true); // false/true는 동기/비동기
+      xhr.send(f1);
+      xhr.onload = () =>{
+        if(xhr.status == 200) {
+          const data = JSON.parse(xhr.response);
+          const dis = document.querySelector('#dis')
+          dis.innerHTML = '';
+          
+          if(data.result == 'success') {
+
+            // |가 있는지 확인
+            if(data.img.indexOf('|') != -1) {
+              const img_arr = data.img.split('|');
+              for(let img of img_arr) {
+                dis.innerHTML += '<img src="' + img + '">';
+              }
+            } else {
+              dis.innerHTML = '<img src="'+data.img+'">';
+            }
+
+
+
+          }
+        }
+      }
+    })
+  </script>
+</body>
+</html>

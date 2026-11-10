@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AJAX 투표프로그램</title>
+  <script>
+    function getVote(int) {
+      const xhr = new XMLHttpRequest();
+      xhr.open("GET", "ajax_poll.php?vote=" + int, true);
+      xhr.send();
+
+      xhr.onload = function() {
+        if (this.status == 200) {
+          document.querySelector('#poll').innerHTML = this.responseText
+        }
+      }
+
+    }
+  </script>
+</head>
+<body>
+  <div id="poll">
+    <h3>여러분은 왕초보 홍페이지를 구독하셨나요?</h3>
+    <form action="">
+      Yes : <input type="radio" name="vote" value="0" onclick="getVote(this.value)"> <br>
+      No : <input type="radio" name="vote" value="1" onclick="getVote(this.value)">
+    </form>
+  </div>
+</body>
+</html>
