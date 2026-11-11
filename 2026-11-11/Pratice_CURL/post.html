@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <h2>몇 번째 게시글을 가져올까요</h2>
+
+  <form>
+    <input type="text">
+    <button>확인</button>
+  </form>
+
+  <script>
+    const input = document.querySelector('input')
+    const button = document.querySelector('button')
+
+    button.addEventListener('click', (e)=>{
+      e.preventDefault();
+
+      const xhr = new XMLHttpRequest();
+
+      xhr.open("post", `post.php?id=${input.value}`, true);
+      xhr.send();
+
+      xhr.onload = () =>{
+        if(xhr.status != 200) {
+          console.log(xhr.status)
+          return;
+        }; 
+        const rs = JSON.parse(xhr.response);
+
+        document.body.innerHTML = `
+          <h2>${rs[0].id}번째 게시글</h2>
+          <h3>${rs[0].title}</h3>
+          <p>${rs[0].body}</p>
+        `
+      }
+
+    })
+  </script>
+</body>
+</html>
