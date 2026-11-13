@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+
+  <!-- 확장자가 html일때는 PHP 코드가 그대로 노출되고 실행도 안된다 -->
+
+  <!-- httpd-xampp.conf 파일에서  -->
+  <!-- 
+  <FilesMatch "\.php$">
+  SetHandler application/x-httpd-php
+  </FilesMatch> 
+  부분을 하나 더 만들어서(복사해서) html로 바꾸기-->
+  <?php echo "반가워요"; ?>
+
+
+</body>
+</html>
